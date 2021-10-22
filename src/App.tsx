@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import Carousel from "./lib";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const colors = ["#f90", "#ef0", "#e0f", "#f00", "#3ec"];
 
+const App = () => (
+  <Carousel
+    interval={2000}
+    // onChange={() => console.log("Data changed")}
+    autoPlay={false}
+  >
+    {colors.map((item, i) => (
+      <div
+        key={i}
+        style={{
+          width: "100%",
+          height: i === 1 ? "40vh" : "60vh",
+          backgroundColor: colors[i],
+        }}
+      ></div>
+    ))}
+  </Carousel>
+);
 export default App;
