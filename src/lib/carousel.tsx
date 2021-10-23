@@ -13,7 +13,7 @@ import Arrow from "./arrow";
 import Slider from "./slider";
 import Dots from "./dots";
 
-const containerStyle: React.CSSProperties = {
+const wrapperStyle: React.CSSProperties = {
   position: "relative",
   width: "300px",
   height: "100%",
@@ -26,14 +26,13 @@ const transition: AnimationOptions<any> = {
   bounce: 0,
 };
 
-const Wrapper = React.forwardRef<
-  HTMLDivElement,
-  { children: React.ReactNode }
->((props, ref) => (
-  <div ref={ref} style={containerStyle}>
-    {props.children}
-  </div>
-));
+const Wrapper = React.forwardRef<HTMLDivElement, { children: React.ReactNode }>(
+  (props, ref) => (
+    <div ref={ref} style={wrapperStyle}>
+      {props.children}
+    </div>
+  )
+);
 
 export const Carousel = ({
   children,
@@ -42,6 +41,7 @@ export const Carousel = ({
   renderDots,
   autoPlay = true,
   interval = 2000,
+  setIndexer,
 }: CarouselProps) => {
   const x = useMotionValue(0);
   const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -72,10 +72,12 @@ export const Carousel = ({
 
   const handleNext = React.useCallback(() => {
     setIndex(index + 1 === childrens.length ? index : index + 1);
-  }, [childrens.length, index]);
+    setIndexer(index + 1 === childrens.length ? index : index + 1);
+  }, [childrens.length, index, setIndexer]);
 
   const handlePrev = () => {
     setIndex(index - 1 < 0 ? 0 : index - 1);
+    setIndexer(index - 1 < 0 ? 0 : index - 1);
   };
 
   React.useEffect(() => {

@@ -4,7 +4,7 @@ import { SliderProps } from "./types";
 
 const pageStyle: MotionStyle = {
   width: "100%",
-  height: "100vh",
+  height: "100%",
   display: "inline-block",
   flex: "none",
 };
@@ -13,7 +13,6 @@ const Slider = ({ x, i, onDragEnd, children, activeIndex }: SliderProps) => (
   <motion.div
     style={{
       ...pageStyle,
-      height: i === activeIndex ? "150%" : "100%",
       x,
       left: `${i * 100}%`,
       right: `${i * 100}%`,
